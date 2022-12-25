@@ -9685,17 +9685,12 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 const core = __nccwpck_require__(9935);
-const { getPullRequest } = __nccwpck_require__(2835);
-
-const getPRName = async () => {
-  const pullRequest = await getPullRequest();
-  const prName = pullRequest.title;
-  return prName;
-}
+const github = __nccwpck_require__(2835);
 
 try {
-  core.setOutput('METIS_TAG_PR', getPRName() || 'Action not trigger from pr')
-  console.log(getPRName())
+  const context = github.context;
+  const pullRequest = context.payload.pull_request;
+  core.setOutput('METIS_TAG_PR', pullRequest.title || 'Action not trigger from pr');
 } catch (error) {
   core.setFailed(error.message);
 }

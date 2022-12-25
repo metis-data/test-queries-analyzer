@@ -1,15 +1,10 @@
 const core = require('@actions/core');
-const { getPullRequest } = require('@actions/github');
-
-const getPRName = async () => {
-  const pullRequest = await getPullRequest();
-  const prName = pullRequest.title;
-  return prName;
-}
+const github = require('@actions/github');
 
 try {
-  core.setOutput('METIS_TAG_PR', getPRName() || 'Action not trigger from pr')
-  console.log(getPRName())
+  const context = github.context;
+  const pullRequest = context.payload.pull_request;
+  core.setOutput('METIS_TAG_PR', pullRequest.title || 'Action not trigger from pr');
 } catch (error) {
   core.setFailed(error.message);
 }
