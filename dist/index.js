@@ -59,7 +59,7 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 const core = __nccwpck_require__(838);
-const { github, getPullRequest } = __nccwpck_require__(766);
+const { getPullRequest } = __nccwpck_require__(766);
 
 try {
   async function getPRName() {
@@ -67,17 +67,10 @@ try {
     const prName = pullRequest.title;
     console.log(prName);
   }
-  
-  // `who-to-greet` input defined in action metadata file
-  const nameToGreet = core.getInput('who-to-greet');
-  console.log(`Hello ${nameToGreet}!`);
-  const time = (new Date()).toTimeString();
-  core.setOutput("time", time);
+
   core.setOutput('METIS_TAG_PR', getPRName())
   process.env.JOHN_MEKEIN = "John mekein";
-  // Get the JSON webhook payload for the event that triggered the workflow
-  const payload = JSON.stringify(github.context.payload, undefined, 2)
-  console.log(`The event payload: ${payload}`);
+  
 } catch (error) {
   core.setFailed(error.message);
 }
