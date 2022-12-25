@@ -8,9 +8,9 @@ try {
     console.log(prName);
   }
 
-  core.setOutput('METIS_TAG_PR', getPRName())
-  process.env.JOHN_MEKEIN = "John mekein";
-  
+  core.setOutput('METIS_TAG_PR', getPRName() || 'Action not trigger from pr')
+  console.log(getPRName())
+ 
 } catch (error) {
   core.setFailed(error.message);
 }
