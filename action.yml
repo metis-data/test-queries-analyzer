@@ -1,8 +1,8 @@
 name: 'Metis Test Suite'
 description: 'Create metis test session'
 outputs:
-  METIS_TAG_PR: # id of output
-    description: 'the tag test'
+  pr_tag: # id of output
+    description: 'the tag pr value'
 runs:
   using: 'node16'
   main: 'dist/index.js'
