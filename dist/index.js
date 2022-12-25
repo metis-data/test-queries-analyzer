@@ -9687,16 +9687,15 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(9935);
 const { getPullRequest } = __nccwpck_require__(2835);
 
-try {
-  async function getPRName() {
-    const pullRequest = await getPullRequest();
-    const prName = pullRequest.title;
-    console.log(prName);
-  }
+const getPRName = async () => {
+  const pullRequest = await getPullRequest();
+  const prName = pullRequest.title;
+  return prName;
+}
 
+try {
   core.setOutput('METIS_TAG_PR', getPRName() || 'Action not trigger from pr')
   console.log(getPRName())
- 
 } catch (error) {
   core.setFailed(error.message);
 }
