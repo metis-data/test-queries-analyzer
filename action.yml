@@ -1,13 +1,8 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
-inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
-    required: true
-    default: 'World'
+name: 'Metis Test Suite'
+description: 'Create metis test session'
 outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  METIS_TAG_PR: # id of output
+    description: 'the tag test'
 runs:
   using: 'node16'
   main: 'dist/index.js'
