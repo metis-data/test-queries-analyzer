@@ -9,7 +9,7 @@ async function commentPr() {
   await octokit.rest.issues.createComment({
     ...context.repo,
     issue_number: pull_request.number,
-    body: 'Thank you for submitting a pull request! We will'
+    body: `https://app.metisdata.io/tests/${core.getInput('metis_api_key')}`
   });
 }
 
