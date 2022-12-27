@@ -9507,6 +9507,14 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
+/***/ 6623:
+/***/ ((module) => {
+
+module.exports = eval("require")("@octokit/rest");
+
+
+/***/ }),
+
 /***/ 5924:
 /***/ ((module) => {
 
@@ -9686,12 +9694,33 @@ var __webpack_exports__ = {};
 (() => {
 const core = __nccwpck_require__(9935);
 const github = __nccwpck_require__(2835);
+const { Octokit } = __nccwpck_require__(6623);
+
+
+const commentOnPr = async () => {
+  const owner = process.env.GITHUB_REPOSITORY_OWNER;
+  const repo = process.env.GITHUB_REPOSITORY_NAME;
+    // Create the comment on the pull request
+    const octokit = new Octokit({
+      auth: core.getInput('github_token'),
+    }); 
+    await octokit.issues.createComment({
+      owner,
+      repo,
+      issue_number: pullRequest.number,
+      body: "This is a new comment on the pull request",
+  });
+}
 
 try {
   const context = github.context;
+  core.getInput('metis_api_key');
   const pullRequest = context.payload.pull_request;
   console.log(pullRequest.title);
   core.setOutput('pr_tag', pullRequest.title || 'Action not trigger from pr');
+  commentOnPr();
+
+
 } catch (error) {
   core.setFailed(error.message);
 }

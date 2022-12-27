@@ -1,5 +1,14 @@
 name: 'Metis Test Suite'
 description: 'Create metis test session'
+inputs:
+  metis_api_key:
+    description: metis api key project identifier
+    required: true
+    default: ''
+  github_token:
+    description: github token 
+    required: true
+    default: ''
 outputs:
   pr_tag: # id of output
     description: 'the tag pr value'
