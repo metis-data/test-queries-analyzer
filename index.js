@@ -3,6 +3,7 @@ const github = require('@actions/github');
 const { context } = require('@actions/github')
 const octokit = github.getOctokit(core.getInput('github_token'));
 
+const { pull_request } = context.payload;
 
 async function commentPr() {
   await octokit.rest.issues.createComment({
