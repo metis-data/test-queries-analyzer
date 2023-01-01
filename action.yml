@@ -9,6 +9,10 @@ inputs:
     description: github token 
     required: true
     default: ''
+  target_url:
+    description: target url
+    required: false
+    default: ''
 outputs:
   pr_tag: # id of output
     description: 'the tag pr value'
