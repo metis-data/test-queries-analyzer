@@ -21,7 +21,7 @@ const commentPr = async () => {
 const createNewTest = async () => {
   try {
     axios
-      .post(`${core.getInput('target_url')}/tests/${core.getInput('metis_api_key')}`, {
+      .post(`${core.getInput('target_url')}/api/tests/create`, {
         name: pull_request.title,
         apiKey: core.getInput('metis_api_key'),
       })
