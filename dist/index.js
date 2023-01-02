@@ -16790,7 +16790,7 @@ const commentPr = async () => {
     await octokit.rest.issues.createComment({
       ...context.repo,
       issue_number: pull_request.number,
-      body: encodeURI(`${core.getInput('target_url')}/tests/${core.getInput('metis_api_key')}?tag=${pull_request.title}`),
+      body: `${core.getInput('target_url')}/tests/${core.getInput('metis_api_key')}?tag=${pull_request.title}`,
     });
   } catch (error) {
     console.log(error);
