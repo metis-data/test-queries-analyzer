@@ -11,7 +11,7 @@ const commentPr = async () => {
     await octokit.rest.issues.createComment({
       ...context.repo,
       issue_number: pull_request.number,
-      body: `Link To Your Pr Test \n :link: (${encodeURI(`${core.getInput('target_url')}/projects/${core.getInput('metis_api_key')}/${core.getInput('metis_api_key')}?tag=${pull_request.title}`)})`,
+      body: `Link to your test :link: (${encodeURI(`${core.getInput('target_url')}/projects/${core.getInput('metis_api_key')}/${core.getInput('metis_api_key')}?tag=${pull_request.title}`)})`,
     });
   } catch (error) {
     console.log(error);
