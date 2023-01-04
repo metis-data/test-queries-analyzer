@@ -1,4 +1,4 @@
-/******/ (() => { // webpackBootstrap
+require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
 /***/ 2690:
@@ -16787,10 +16787,11 @@ const { pull_request } = context.payload;
 
 const commentPr = async () => {
   try {
+    const urlPrefix = core.getInput('target_url') || `https://ingest-stg.metisdata.io`;
     await octokit.rest.issues.createComment({
       ...context.repo,
       issue_number: pull_request.number,
-      body: `:link: to your test  (${encodeURI(`${core.getInput('target_url')}/projects/${core.getInput('metis_api_key')}/${core.getInput('metis_api_key')}?tag=${pull_request.title}`)})`,
+      body: `:link: to your test  (${encodeURI(`${urlPrefix}/projects/${core.getInput('metis_api_key')}/${core.getInput('metis_api_key')}?tag=${pull_request.title}`)})`,
     });
   } catch (error) {
     console.log(error);
@@ -16799,8 +16800,9 @@ const commentPr = async () => {
 
 const createNewTest = async () => {
   try {
+    const urlPrefix = core.getInput('target_url') || `https://ingest-stg.metisdata.io`;
     axios
-      .post(`${core.getInput('target_url')}/api/tests/create`, {
+      .post(`${urlPrefix}/api/tests/create`, {
         name: pull_request.title,
         apiKey: core.getInput('metis_api_key'),
       })
@@ -16833,3 +16835,4 @@ try {
 module.exports = __webpack_exports__;
 /******/ })()
 ;
+//# sourceMappingURL=index.js.map
