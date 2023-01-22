@@ -2,9 +2,6 @@ name: 'Analyze migrations'
 description: 'Check for migrations files ans sens them to analyze'
 author: 'Issackr'
 inputs:
-  from:
-    description: 'Commit SHA from'
-    required: true
   to:
     description: 'Commit SHA to'
     required: true

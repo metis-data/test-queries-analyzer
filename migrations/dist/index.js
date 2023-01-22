@@ -2829,10 +2829,10 @@ const core = __nccwpck_require__(432);
 const execSync = (__nccwpck_require__(81).execSync);
 
 async function main() {
-  const shaFrom = core.getInput("from");
   const shaTo = core.getInput("to");
   const apiKey = core.getInput("api_key");
 
+  const shaFrom = execSync(`git rev-parse ${shaTo}^`);
   let output = execSync(
     `git diff --diff-filter=ACM ${shaFrom} ${shaTo} --name-only | grep 'migration.sql'`
   );
