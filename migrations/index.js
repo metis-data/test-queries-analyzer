@@ -6,11 +6,14 @@ async function main() {
   const shaTo = core.getInput("to");
   const apiKey = core.getInput("api_key");
 
+  console.log(`sha from ${shaFrom}`);
+  console.log(`sha to ${shaTo}`);
+
   let output = execSync(
-    `git diff --diff-filter=ACM ${shaFrom} ${shaTo} --name-only | grep 'migration.sql'`
+    `git diff --diff-filter=ACM ${shaFrom} ${shaTo} --name-only | grep 'migration.sql' | jq -Rsc '. / "\n" - [""]'`
   );
-  let newMigrationsFiles = JSON.parse(output);
-  console.log(newMigrationsFiles);
+  const newMigrationsFiles = JSON.parse(output);
+  console.log(`new files paths: ${newMigrationsFiles}`);
 }
 
 main();
