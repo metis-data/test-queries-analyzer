@@ -1,0 +1,16 @@
+name: 'Analyze migrations'
+description: 'Check for migrations files ans sens them to analyze'
+author: 'Issackr'
+inputs:
+  from:
+    description: 'Commit SHA from'
+    required: true
+  to:
+    description: 'Commit SHA to'
+    required: true
+  api_key:
+    description: 'Metis api key project identifier'
+    required: true
+runs:
+  using: node16
+  main: 'dist/index.js'
