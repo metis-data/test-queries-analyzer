@@ -21,3 +21,4 @@ jobs:
           to: ${{ github.event.pull_request.head.sha }}
           metis_api_key: 5afTjJAJB75nO88sFVehR6KbwfjDlkar471zFRNW
           github_token: {{ github.token }}
+          target_url: http://localhost:3000
