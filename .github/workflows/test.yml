@@ -19,4 +19,5 @@ jobs:
         with:
           from: ${{ github.event.pull_request.base.sha }}
           to: ${{ github.event.pull_request.head.sha }}
-          api_key: 5afTjJAJB75nO88sFVehR6KbwfjDlkar471zFRNW
+          metis_api_key: 5afTjJAJB75nO88sFVehR6KbwfjDlkar471zFRNW
+          github_token: {{ github.token }}
