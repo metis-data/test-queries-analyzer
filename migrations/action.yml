@@ -8,9 +8,16 @@ inputs:
   to:
     description: 'Commit SHA to'
     required: true
-  api_key:
+  metis_api_key:
     description: 'Metis api key project identifier'
     required: true
+  github_token:
+    description: 'Github token'
+    required: true
+  target_url:
+    description: 'Metis target url'
+    required: false
+    default: 'https://ingest-stg.metisdata.io'
 runs:
   using: node16
   main: 'dist/index.js'
