@@ -16067,15 +16067,17 @@ async function main() {
     const newMigrationsFiles = JSON.parse(output);
     console.log(`new files paths: ${newMigrationsFiles}`);
 
-    const filesData = [];
+    const migrationsData = [];
     await Promise.all(
       newMigrationsFiles.map((migration) => {
-        filesData.push(fs.readFileSync(migration, 'utf-8'));
+        const content = fs.readFileSync(migration, 'utf-8');
+        migrationsData.push(content);
       }),
     );
 
     const res = await axios.post(`${url}/api/migrations/create`, {
-      migrations: filesData,
+      migrationsData,
+      prId: `${pull_request.number}`,
       apiKey,
     });
     console.log(res);
@@ -16088,7 +16090,8 @@ async function main() {
       )}`,
     });
   } catch (e) {
-    console.log(e);
+    console.error(e);
+    core.setFailed(e);
   }
 }
 
