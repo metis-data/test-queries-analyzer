@@ -1,5 +1,5 @@
 name: 'Analyze migrations'
-description: 'Check for migrations files ans sens them to analyze'
+description: 'Check for migrations files ans sends them to analyze'
 author: 'Issackr'
 inputs:
   from:
@@ -17,7 +17,7 @@ inputs:
   target_url:
     description: 'Metis target url'
     required: false
-    default: 'https://ingest-stg.metisdata.io'
+    default: 'https://app.metisdata.io'
 runs:
   using: node16
   main: 'dist/index.js'

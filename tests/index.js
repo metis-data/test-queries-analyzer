@@ -8,7 +8,7 @@ const { pull_request } = context.payload;
 
 const commentPr = async () => {
   try {
-    const urlPrefix = core.getInput('target_url') || `https://ingest-stg.metisdata.io`;
+    const urlPrefix = core.getInput('target_url') || `https://app.metisdata.io`;
     await octokit.rest.issues.createComment({
       ...context.repo,
       issue_number: pull_request.number,
@@ -17,26 +17,22 @@ const commentPr = async () => {
       )}`,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    core.setFailed(error);
   }
 };
 
 const createNewTest = async () => {
   try {
-    const urlPrefix = core.getInput('target_url') || `https://ingest-stg.metisdata.io`;
-    axios
-      .post(`${urlPrefix}/api/tests/create`, {
-        name: pull_request.title,
-        apiKey: core.getInput('metis_api_key'),
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    const urlPrefix = core.getInput('target_url') || `https://app.metisdata.io`;
+    const res = await axios.post(`${urlPrefix}/api/tests/create`, {
+      name: pull_request.title,
+      apiKey: core.getInput('metis_api_key'),
+    });
+    console.log(res);
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    core.setFailed(error);
   }
 };
 
@@ -50,5 +46,6 @@ try {
   createNewTest();
   commentPr();
 } catch (error) {
-  core.setFailed(error.message);
+  console.error(error);
+  core.setFailed(error);
 }
