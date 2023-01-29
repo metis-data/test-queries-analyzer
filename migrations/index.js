@@ -25,10 +25,14 @@ async function main() {
     console.log(`new files paths: ${newMigrationsFiles}`);
 
     const migrationsData = [];
+    const insights = {};
+    execSync('npm install -g pgsql-parser');
     await Promise.all(
-      newMigrationsFiles.map((migration) => {
-        const content = fs.readFileSync(migration, 'utf-8');
-        migrationsData.push(content);
+      newMigrationsFiles.map((migration, index) => {
+        migrationsData.push(fs.readFileSync(migration, { encoding: 'utf-8' }));
+        const rawInsight = execSync(`pgsql-parser ${migration}`);
+        const insight = JSON.parse(rawInsight);
+        Object.assign(insights, { [index]: insight });
       }),
     );
 
@@ -36,6 +40,7 @@ async function main() {
       migrationsData,
       prId: `${pull_request.number}`,
       apiKey,
+      insights
     });
     console.log(res);
 
@@ -47,7 +52,7 @@ async function main() {
       )}`,
     });
   } catch (e) {
-    console.error(e);
+    core.error(e);
     core.setFailed(e);
   }
 }
