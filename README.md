@@ -27,7 +27,7 @@ Add the following code to your GitHub Actions workflow file:
 ### 2.
 Inject tag_pr in your env for your sdk usage
 ```yaml
-- name: test
+- name: E2E Test that check sql queries on real database
         .
         . 
         env:
