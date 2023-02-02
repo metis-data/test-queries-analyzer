@@ -15,7 +15,8 @@ This GitHub Action allows you to create a new test in Metis, and comment on a pu
 Add the following code to your GitHub Actions workflow file:
 ```yaml
 - name: Metis Test
-  uses: actions/sql-queries-analyzer@v1
+  id: tag_pr
+  uses: metis-data/sql-queries-analyzer@v1
   with:
     metis_api_key: ${{ secrets.METIS_API_KEY }}
     github_token: ${{ secrets.GITHUB_TOKEN }}
