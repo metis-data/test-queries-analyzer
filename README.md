@@ -5,6 +5,7 @@ This GitHub Action allows you to create a new test in Metis, and comment on a pu
 ## Prerequisites
 - A Metis account with a valid API key. https://docs.metisdata.io/metis/getting-started/what-is-metis
 - A GitHub repository
+- Metis SDK installed on your project.
 
 ## Inputs
 - `metis_api_key`: The Metis API key to use for creating the test
@@ -12,6 +13,8 @@ This GitHub Action allows you to create a new test in Metis, and comment on a pu
 - `target_url` (optional): The URL to use for the Metis API. Default: https://app.metisdata.io
 
 ## Usage
+
+### 1.
 Add the following code to your GitHub Actions workflow file:
 ```yaml
 - name: Metis Test
@@ -20,3 +23,15 @@ Add the following code to your GitHub Actions workflow file:
   with:
     metis_api_key: ${{ secrets.METIS_API_KEY }}
     github_token: ${{ secrets.GITHUB_TOKEN }}
+```
+### 2.
+Inject tag_pr in your env for your sdk usage
+```yaml
+- name: test
+        .
+        . 
+        env:
+          METIS_TAG_PR: ${{ steps.tag_pr.outputs.pr_tag  }}
+        .
+        .
+```
