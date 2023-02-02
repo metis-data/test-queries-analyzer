@@ -3,7 +3,7 @@
 This GitHub Action allows you to create a new test in Metis, and comment on a pull request with the results of the test.
 
 ## Prerequisites
-- A Metis account with a valid API key
+- A Metis account with a valid API key. https://docs.metisdata.io/metis/getting-started/what-is-metis
 - A GitHub repository
 
 ## Inputs
