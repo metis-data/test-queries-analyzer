@@ -1,6 +1,6 @@
 {
   "name": "sql-queries-analyzer",
-  "version": "1.0.2",
+  "version": "1.0.0",
   "description": "sql queries analyzer catch all your queries and analyze them ",
   "main": "index.js",
   "scripts": {
