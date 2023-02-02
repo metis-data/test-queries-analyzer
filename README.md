@@ -1,11 +1,11 @@
 # Metis Test Action
 
 This GitHub Action allows you to create a new test in Metis, and comment on a pull request with the results of the test.
+we use your pr-name as your test name.
 
 ## Prerequisites
 - A Metis account with a valid API key. https://docs.metisdata.io/metis/getting-started/what-is-metis
-- A GitHub repository
-- Metis SDK installed on your project.
+- Metis SDK installed on your project. https://docs.metisdata.io/metis/sdk-integration/general
 
 ## Inputs
 - `metis_api_key`: The Metis API key to use for creating the test
