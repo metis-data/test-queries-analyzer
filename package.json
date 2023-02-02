@@ -1,7 +1,7 @@
 {
-  "name": "metis-test-github-action",
-  "version": "1.0.0",
-  "description": "add pr name to each span to create test clojure",
+  "name": "sql-queries-analyzer",
+  "version": "1.0.2",
+  "description": "sql queries analyzer catch all your queries and analyze them ",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
