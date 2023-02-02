@@ -6,7 +6,7 @@ const {pull_request} = context.payload
 
 const updateTestIsCompleted = async () => {
   try {
-    const urlPrefix = core.getInput('target_url') || `https://ingest.metisdata.io`;
+    const urlPrefix = core.getInput('target_url') || `https://app.metisdata.io`;
     axios
       .post(
         `${urlPrefix}/api/tests/update-test-to-completed`,
