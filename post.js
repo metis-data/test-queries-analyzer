@@ -13,6 +13,9 @@ const updateTestIsCompleted = async () => {
         {
           name: pull_request.title,
           apiKey: core.getInput('metis_api_key')
+        }, {
+          headers: {
+            'x-api-key': core.getInput('metis_api_key'),
         }
       )
       .then(function (response) {
