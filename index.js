@@ -47,7 +47,7 @@ try {
   core.setOutput('pr_tag', testName?.replace('#', '') || 'Action not trigger from pr');
   createNewTest();
 
-  if (pull_request) {
+  if (pull_request ==! undefined && pull_request?.title !==undefined) {
     commentPr();
   }
 } catch (error) {
