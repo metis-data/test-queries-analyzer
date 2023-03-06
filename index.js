@@ -5,7 +5,7 @@ const { context } = require('@actions/github');
 const octokit = github.getOctokit(core.getInput('github_token'));
 
 const { pull_request } = context.payload;
-const testName = pull_request?.title?.replace('#', '');
+const testName = pull_request?.title ?  pull_request?.title?.replace('#', '') : context.sha;
 
 const commentPr = async () => {
   try {

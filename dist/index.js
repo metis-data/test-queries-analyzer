@@ -16040,7 +16040,7 @@ const { context } = __nccwpck_require__(2835);
 const octokit = github.getOctokit(core.getInput('github_token'));
 
 const { pull_request } = context.payload;
-const testName = pull_request?.title?.replace('#', '');
+const testName = pull_request?.title ?  pull_request?.title?.replace('#', '') : context.sha;
 
 const commentPr = async () => {
   try {
@@ -16064,7 +16064,11 @@ const createNewTest = async () => {
     const res = await axios.post(`${urlPrefix}/api/tests/create`, {
       name: testName,
       apiKey: core.getInput('metis_api_key'),
-    });
+    }, {
+      headers: {
+        'x-api-key': core.getInput('metis_api_key'),
+    }
+});
     console.log(res);
   } catch (error) {
     console.error(error);
@@ -16074,8 +16078,7 @@ const createNewTest = async () => {
 
 try {
   const context = github.context;
-
-  core.getInput('metis_api_key');
+  
   const pullRequest = context.payload.pull_request;
   console.log(pullRequest.title);
   core.setOutput('pr_tag', pullRequest.title?.replace('#', '') || 'Action not trigger from pr');
