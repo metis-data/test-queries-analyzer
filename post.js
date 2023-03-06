@@ -11,7 +11,7 @@ const updateTestIsCompleted = async () => {
       .post(
         `${urlPrefix}/api/tests/update-test-to-completed`,
         {
-          name: pull_request.title,
+          name: pull_request?.title ? pull_request.title : context.sha ,
           apiKey: core.getInput('metis_api_key'),
         },
         {
