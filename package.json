@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": " ncc build index.js --license licenses.txt",
-    "build-post": " ncc build post.js --license licenses.txt"
+    "build-post": " ncc build post.js --out dist/post --license licenses.txt"
   },
   "repository": {
     "type": "git",
