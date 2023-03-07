@@ -5,9 +5,8 @@ const { context } = require('@actions/github');
 const octokit = github.getOctokit(core.getInput('github_token'));
 
 const { pull_request, issue } = context.payload;
-const testName = pull_request && pull_request?.title ? pull_request?.title?.replace('#', '') : context.sha;
 
-const commentPr = async () => {
+const commentPr = async (testName) => {
   try {
     const urlPrefix = core.getInput('target_url') || `https://app.metisdata.io`;
     await octokit.rest.issues.createComment({
@@ -21,7 +20,7 @@ const commentPr = async () => {
   }
 };
 
-const createNewTest = async () => {
+const createNewTest = async (testName) => {
   try {
     const urlPrefix = core.getInput('target_url') || `https://app.metisdata.io`;
     const res = await axios.post(
@@ -36,19 +35,18 @@ const createNewTest = async () => {
         },
       }
     );
-    console.log(res);
   } catch (error) {
-    console.error(error);
     core.setFailed(error);
   }
 };
 
 try {
-  core.setOutput('pr_tag', testName?.replace('#', '') || 'Action not trigger from pr');
-  createNewTest();
+  const testName = pull_request && pull_request?.title ? pull_request?.title?.replace('#', '') : context.sha;
+  core.setOutput('pr_tag', testName);
+  createNewTest(testName);
 
   if (pull_request ==! undefined && pull_request?.title !==undefined) {
-    commentPr();
+    commentPr(testName);
   }
 } catch (error) {
   console.error(error);

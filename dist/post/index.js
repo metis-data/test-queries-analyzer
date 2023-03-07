@@ -16335,13 +16335,13 @@ const { context } = __nccwpck_require__(2835);
 
 const { pull_request } = context.payload;
 
-const updateTestIsCompleted = async () => {
+const updateTestIsCompleted = async (testName) => {
   try {
     const urlPrefix = core.getInput('target_url') || `https://app.metisdata.io`;
     lib_axios.post(
         `${urlPrefix}/api/tests/update-test-to-completed`,
         {
-          name: pull_request && pull_request?.title ? pull_request.title : context.sha ,
+          name: testName ,
           apiKey: core.getInput('metis_api_key'),
         },
         {
@@ -16363,7 +16363,8 @@ const updateTestIsCompleted = async () => {
 
 const run = async () => {
   try {
-    await updateTestIsCompleted();
+    const testName = pull_request && pull_request?.title ? pull_request?.title?.replace('#', '') : context.sha;
+    await updateTestIsCompleted(testName);
   } catch (error) {
     if (error instanceof Error) core.setFailed(error.message);
   }
