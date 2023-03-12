@@ -12,7 +12,7 @@ inputs:
   target_url:
     description: target url
     required: false
-    default: ''
+    default: 'https://app.metisdata.io'
 outputs:
   pr_tag: # id of output
     description: 'the tag pr value'
