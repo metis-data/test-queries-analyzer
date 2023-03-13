@@ -16056,7 +16056,7 @@ const commentPr = async (testName) => {
   }
 };
 
-const createNewTest = async (testName, prId) => {
+const createNewTest = async (testName, prId, prUrl) => {
   try {
     const urlPrefix = core.getInput('target_url');
     const apiKey = core.getInput('metis_api_key');
@@ -16065,6 +16065,7 @@ const createNewTest = async (testName, prId) => {
       {
         prName: testName,
         prId,
+        prUrl,
         apiKey,
       },
       {
@@ -16082,8 +16083,9 @@ async function main() {
   try {
     const testName = pull_request?.title || context.sha;
     const prId = `${pull_request?.number}`;
+    const prUrl = pull_request.html_url;
     core.setOutput('pr_tag', testName);
-    await createNewTest(testName, prId);
+    await createNewTest(testName, prId, prUrl);
 
     if (pull_request?.title !== undefined) {
       await commentPr(testName);
