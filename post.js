@@ -4,19 +4,21 @@ const { context } = require('@actions/github');
 
 const { pull_request } = context.payload;
 
-const updateTestIsCompleted = async (testName) => {
+const updateTestIsCompleted = async (testName, prId) => {
   try {
-    const urlPrefix = core.getInput('target_url') || `https://app.metisdata.io`;
+    const urlPrefix = core.getInput('target_url');
+    const apiKey = core.getInput('metis_api_key');
     axios
       .post(
         `${urlPrefix}/api/tests/update-test-to-completed`,
         {
-          name: testName ,
-          apiKey: core.getInput('metis_api_key'),
+          prName: testName,
+          prId,
+          apiKey,
         },
         {
           headers: {
-            'x-api-key': core.getInput('metis_api_key'),
+            'x-api-key': apiKey,
           },
         }
       )
@@ -33,8 +35,9 @@ const updateTestIsCompleted = async (testName) => {
 
 const run = async () => {
   try {
-    const testName = pull_request && pull_request?.title ? pull_request?.title?.replace('#', '') : context.sha;
-    await updateTestIsCompleted(testName);
+    const testName = pull_request?.title || context.sha;
+    const prId = `${pull_request?.number}`;
+    await updateTestIsCompleted(testName, prId);
   } catch (error) {
     if (error instanceof Error) core.setFailed(error.message);
   }
