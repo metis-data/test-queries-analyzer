@@ -48,7 +48,7 @@ async function main() {
   try {
     const testName = pull_request?.title || context.sha;
     const prId = `${pull_request?.number}`;
-    const prUrl = pull_request.html_url;
+    const prUrl = pull_request?.html_url;
     core.setOutput('pr_tag', testName);
     await createNewTest(testName, prId, prUrl);
 
