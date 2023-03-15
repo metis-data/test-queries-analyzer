@@ -60,7 +60,6 @@ jobs:
         with:
           metis_api_key: ${{ secrets.METIS_API_KEY}}
           github_token: ${{ secrets.GITHUB_TOKEN}}
-          target_url: https://dev.metisdata.io
       - name: checkout
         uses: actions/checkout@v3
 
@@ -72,10 +71,9 @@ jobs:
         env:
           APP_ENV: staging
           OTEL_DEBUG: true
-          METIS_EXPORTER_URL: https://ingest-stg.metisdata.io
           METIS_TAG_PR: ${{ steps.tag_pr.outputs.pr_tag  }}
-          METIS_API_KEY: ${{ secrets.METIS_API_KEY}}
-          DATABASE_URL: ${{ secrets.METIS_E2E_DB_CONNECTION }}
+          METIS_API_KEY: ${{ secrets.METIS_API_KEY}}  #Optional
+          DATABASE_URL: ${{ secrets.METIS_E2E_DB_CONNECTION }} #Optional
         # Run your e2e test (metis use supertest btw)
         run: npm ci  &&  npm run test-sql-queries
 ```
