@@ -69,8 +69,6 @@ jobs:
           node-version: 18.x 
       - name: test
         env:
-          APP_ENV: staging
-          OTEL_DEBUG: true
           METIS_TAG_PR: ${{ steps.tag_pr.outputs.pr_tag  }}
           METIS_API_KEY: ${{ secrets.METIS_API_KEY}}  #Optional
           DATABASE_URL: ${{ secrets.METIS_E2E_DB_CONNECTION }} #Optional
