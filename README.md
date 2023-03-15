@@ -10,7 +10,6 @@ we use your pr-name as your test name.
 ## Inputs
 - `metis_api_key`: The Metis API key to use for creating the test
 - `github_token`: The GitHub token to use for commenting on the pull request
-- `target_url` (optional): The URL to use for the Metis API. Default: https://app.metisdata.io
 
 ## Usage
 
