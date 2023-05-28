@@ -46,7 +46,7 @@ const createNewTest = async (testName, prId, prUrl) => {
 
 async function main() {
   try {
-    const testName = pull_request?.title || context.sha;
+    const testName = pull_request?.title ? `pr:${pull_request.title}` : `commit:${context.sha}`;
     const prId = `${pull_request?.number}`;
     const prUrl = pull_request?.html_url;
     core.setOutput('pr_tag', testName);
